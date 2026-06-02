@@ -15,7 +15,13 @@ tags:
 
 This synthetic example shows how scheduled memory maintenance can stay useful without storing raw logs, empty ledgers, or noisy visible thread summaries.
 
-No-op automation runs are silent by default. A deterministic preflight gate should launch the full workflow only when there is real work to process. Do not write ledgers for repetitive empty checks.
+No-op automation runs are silent by default. A deterministic preflight gate should launch the full workflow only when there is real work to process. If `pending_count` is `0`, exit without side effects. Do not write ledgers for repetitive empty checks.
+
+## Outcome Types
+
+- **Status-only**: no new input, no durable change, and no actionable blocker.
+- **Significant review**: meaningful review happened, but the result may still be `no durable memory`.
+- **Durable memory update**: canonical notes changed and require verification.
 
 ## Empty Scheduled Run
 
@@ -23,6 +29,7 @@ Preflight input:
 
 ```text
 Vault: /path/to/vault
+pending_count: 0
 Pending inbox items: 0
 Pending patch proposals: 0
 Actionable blockers: 0
@@ -43,12 +50,46 @@ none
 
 The run exits before the full closeout workflow. It does not create a session note, read receipt, automation ledger, commit, or visible thread summary.
 
+Status-only response, if requested:
+
+```text
+no changes
+```
+
+## Significant Review With No Durable Memory
+
+Preflight input:
+
+```text
+Vault: /path/to/vault
+pending_count: 1
+Pending inbox items: 1 source note already covered by existing memory
+Pending patch proposals: 0
+Actionable blockers: 0
+Expected maintenance: none
+```
+
+Close the loop result:
+
+```text
+no durable memory: reviewed one pending source, confirmed it duplicates existing Project Alpha reference coverage, and left canonical notes unchanged.
+```
+
+Durable memory written:
+
+```text
+none
+```
+
+This is a significant review, so it gets an explicit closeout result. It still does not create a note, ledger, commit, or thread summary because nothing durable changed.
+
 ## Meaningful Scheduled Run
 
 Preflight input:
 
 ```text
 Vault: /path/to/vault
+pending_count: 1
 Pending inbox items: 1 reviewed source for Project Alpha
 Pending patch proposals: 0
 Actionable blockers: 0
@@ -109,6 +150,12 @@ tags:
 # Project Alpha Inbox Review Ledger
 
 Meaningful run: promoted one reviewed source, updated canonical notes, refreshed the documented derived index, and passed local checks.
+```
+
+Close the loop result:
+
+```text
+session summary: Project Alpha inbox review promoted one durable reference, linked it from the project note, refreshed the documented derived index, and passed local checks.
 ```
 
 ## Risky Edit Becomes Patch Proposal

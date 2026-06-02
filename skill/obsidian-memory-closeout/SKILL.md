@@ -67,13 +67,23 @@ At natural stopping points, write only curated durable summaries:
 
 Then lint memory quality, run configured checks, and refresh documented derived indexes or graphs when available.
 
+### Outcome Classification
+
+Classify each memory workflow before writing:
+
+- **Status-only**: preflight or review found no new input, durable change, or actionable blocker. Return a brief status only when requested. Do not create durable memory artifacts.
+- **Significant review**: the agent read meaningful memory, reviewed inbox/source material, or investigated an open loop. Close the loop with a curated update, proposal, or explicit `no durable memory` reason.
+- **Durable memory update**: project state, decisions, references, preferences, open loops, or canonical notes changed. Write the smallest useful curated update and verify it.
+
 ### Read Receipt Closeout Rule
 
-If you write a read receipt for significant work, close the loop before the final response. The closeout must be one of:
+Close the loop before the final response when you create a read receipt, process a significant review, or modify memory. The closeout must be one of:
 
-- A curated session, project, decision, reference, or preference update.
-- A memory proposal when canonical placement is unclear.
-- An explicit no-durable-change marker for read-only advisory or tiny tasks.
+- Session summary.
+- Project/update note.
+- Decision.
+- Reference or proposal.
+- Explicit `no durable memory` reason for status-only, read-only advisory, or tiny tasks.
 
 If memory files changed:
 
@@ -91,9 +101,11 @@ For scheduled or background runs, preserve signal and avoid visible thread clutt
 
 - No-op automation runs are silent by default. If there is no new input, no durable change, and no actionable blocker, do not create a session note, read receipt, ledger, commit, or user-visible thread summary.
 - A concise `no changes` result is acceptable, but do not store it as durable memory unless it resolves a real open loop.
-- If the host app creates a visible conversation or thread for each scheduled run, add a deterministic preflight gate before invoking the full agent workflow.
-- Preflight should check for pending inputs, unreviewed source material, expected maintenance work, or actionable blockers.
+- Every automation starts with a deterministic preflight gate before invoking the full agent workflow.
+- Preflight should check `pending_count`, pending inputs, unreviewed source material, expected maintenance work, and actionable blockers.
+- If `pending_count` is `0`, exit without side effects.
 - Launch the full closeout workflow only when there is real work to process.
+- If content is processed, produce curated, verifiable output. Never store raw transcripts, full logs, or copied source material.
 - Write automation ledgers only for meaningful runs: promoted memory, archived or processed source material, canonical note changes, actionable blockers, or significant maintenance.
 - Do not write ledgers for repetitive empty checks.
 

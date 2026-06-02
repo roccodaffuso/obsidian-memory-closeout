@@ -18,6 +18,8 @@ Use this checklist when reviewing the repository or preparing a release.
 - Significant read receipts must close the loop with a curated update, proposal, or explicit no-durable-change marker.
 - Checked memory edits use direct writes only for low-risk updates and patch proposals for risky or review-worthy canonical changes.
 - No-op automation runs are silent by default. Automation hygiene uses a deterministic preflight gate and launches only when there is real work to process. Do not write ledgers for repetitive empty checks.
+- Workflow outcomes distinguish status-only checks, significant reviews, and durable memory updates.
+- Automations exit without side effects when `pending_count` is `0`.
 
 ## Repository Quality
 
@@ -43,3 +45,4 @@ Use this checklist when reviewing the repository or preparing a release.
 - Verification guidance includes local checks, supported graph/index refresh, Git status inspection, focused staging, and checkpoint commits when appropriate.
 - Patch proposals validate target existence, content hash freshness, required structure, and privacy before safe apply.
 - Empty automation checks do not create durable no-op notes, read receipts, ledgers, commits, or user-visible thread summaries.
+- Significant reviews close the loop with a curated update, proposal, or explicit `no durable memory` reason.

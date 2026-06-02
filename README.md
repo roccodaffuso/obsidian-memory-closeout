@@ -16,6 +16,7 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Writes concise session summaries, decisions, project updates, references, or inbox proposals.
 - Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
 - Reviews web clips as unreviewed inbox material before promoting them into canonical notes.
+- Distinguishes status-only checks, significant reviews, and durable memory updates.
 - Uses checked patch proposals when a canonical memory edit is clear but direct writing is risky or review-worthy.
 - Keeps scheduled automation runs quiet when there is no real memory work to process.
 - Finds or asks for the target Obsidian vault and follows existing vault conventions first.
@@ -43,9 +44,17 @@ Allowed v1 operations are intentionally small: append to an existing section, up
 
 Scheduled memory automations should preserve signal. No-op automation runs are silent by default: when there is no new input, durable change, or actionable blocker, the run should not create a session note, read receipt, ledger, commit, or visible thread summary.
 
-If the host app creates a visible conversation for every scheduled run, use a deterministic preflight gate before invoking the full closeout workflow. Only launch when there is real work to process. Only meaningful runs should write ledgers: promoted memory, processed source material, canonical note changes, actionable blockers, or significant maintenance. Do not write ledgers for repetitive empty checks.
+Every automation should start with a deterministic preflight gate. If `pending_count` is `0`, exit without side effects and report only a brief status if requested. If the host app creates a visible conversation for every scheduled run, use this preflight gate before invoking the full closeout workflow.
 
-Read receipts still need to close the loop. For significant work, close with a curated update, proposal, or explicit no-durable-change marker. See [examples/automation-hygiene.md](examples/automation-hygiene.md).
+Only launch when there is real work to process. Meaningful runs can write ledgers for promoted memory, processed source material, canonical note changes, actionable blockers, or significant maintenance. Do not write ledgers for repetitive empty checks.
+
+Read receipts, significant reviews, and memory edits must close the loop before the final response. Valid closeouts are a session summary, project/update note, decision, reference/proposal, or explicit `no durable memory` reason. See [examples/automation-hygiene.md](examples/automation-hygiene.md).
+
+## Workflow Outcomes
+
+- **Status-only**: a preflight or review found nothing new or durable. Return a short status only when requested; do not create notes, ledgers, commits, threads, or read receipts.
+- **Significant review**: memory or inbox material was meaningfully reviewed. Close with a curated update, proposal, or `no durable memory` reason.
+- **Durable memory update**: canonical notes changed. Run local checks, refresh documented indexes/graphs when supported, inspect Git status, and checkpoint meaningful changes.
 
 ## Why This Exists
 
@@ -199,6 +208,7 @@ The validation checks that:
 - Referenced files exist.
 - Graphify runtime guidance is packaged with the skill.
 - Checked memory edit guidance is packaged with the skill.
+- Automation hygiene and workflow outcome guidance are covered.
 - Sanitized examples contain expected frontmatter.
 - Packaging produces a zip with the expected skill files.
 - The repository does not contain common secret-like patterns.
