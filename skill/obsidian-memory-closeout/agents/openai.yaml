@@ -1,4 +1,4 @@
 interface:
   display_name: "Obsidian Memory Closeout"
-  short_description: "Query, ingest, and lint Obsidian memory"
-  default_prompt: "Query relevant memory in my Obsidian vault before work, then proactively ingest durable updates, use patch proposals for risky canonical edits, close significant read receipts, lint memory quality, review web clips if relevant, and refresh documented derived indexes if available."
+  short_description: "Query, ingest, lint, and maintain Obsidian memory"
+  default_prompt: "Query relevant memory in my Obsidian vault before work, then proactively ingest durable updates, keep no-op automations silent, use patch proposals for risky canonical edits, close significant read receipts, lint memory quality, review web clips if relevant, and refresh documented derived indexes if available."

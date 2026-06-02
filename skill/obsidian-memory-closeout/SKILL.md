@@ -1,6 +1,6 @@
 ---
 name: obsidian-memory-closeout
-description: Query existing Obsidian memory before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, lint findings, and optional derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, or refresh documented derived indexes without storing raw logs or secrets.
+description: Query existing Obsidian memory before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, automation hygiene findings, lint findings, and optional derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, run scheduled memory automations, or refresh documented derived indexes without storing raw logs or secrets.
 ---
 
 # Obsidian Memory Closeout
@@ -84,6 +84,18 @@ If memory files changed:
 - Create a checkpoint commit when appropriate.
 
 Consolidate repeated micro-receipts from the same work stream into one closeout note. If receipt classification is wrong for a repeated pattern, update the classifier or rules instead of only patching the individual receipt.
+
+### Automation Hygiene
+
+For scheduled or background runs, preserve signal and avoid visible thread clutter.
+
+- No-op automation runs are silent by default. If there is no new input, no durable change, and no actionable blocker, do not create a session note, read receipt, ledger, commit, or user-visible thread summary.
+- A concise `no changes` result is acceptable, but do not store it as durable memory unless it resolves a real open loop.
+- If the host app creates a visible conversation or thread for each scheduled run, add a deterministic preflight gate before invoking the full agent workflow.
+- Preflight should check for pending inputs, unreviewed source material, expected maintenance work, or actionable blockers.
+- Launch the full closeout workflow only when there is real work to process.
+- Write automation ledgers only for meaningful runs: promoted memory, archived or processed source material, canonical note changes, actionable blockers, or significant maintenance.
+- Do not write ledgers for repetitive empty checks.
 
 ## Operating Model
 

@@ -17,6 +17,7 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
 - Reviews web clips as unreviewed inbox material before promoting them into canonical notes.
 - Uses checked patch proposals when a canonical memory edit is clear but direct writing is risky or review-worthy.
+- Keeps scheduled automation runs quiet when there is no real memory work to process.
 - Finds or asks for the target Obsidian vault and follows existing vault conventions first.
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify or other derived indexes without treating them as the source of truth.
@@ -37,6 +38,14 @@ Obsidian Markdown remains the canonical source of truth. Direct edits are best f
 When the target note is clear but the edit is risky, concurrent, stale-prone, or review-worthy, the skill uses a patch proposal instead of editing directly. Patch proposals include the target note/path, target content hash, operation, metadata, and proposed change.
 
 Allowed v1 operations are intentionally small: append to an existing section, update one existing frontmatter field, or add one wikilink to `Links`. Deletions, renames, multi-file rewrites, and whole-note replacements are excluded. See [skill/obsidian-memory-closeout/references/checked-memory-edits.md](skill/obsidian-memory-closeout/references/checked-memory-edits.md).
+
+## Automation Hygiene
+
+Scheduled memory automations should preserve signal. No-op automation runs are silent by default: when there is no new input, durable change, or actionable blocker, the run should not create a session note, read receipt, ledger, commit, or visible thread summary.
+
+If the host app creates a visible conversation for every scheduled run, use a deterministic preflight gate before invoking the full closeout workflow. Only launch when there is real work to process. Only meaningful runs should write ledgers: promoted memory, processed source material, canonical note changes, actionable blockers, or significant maintenance. Do not write ledgers for repetitive empty checks.
+
+Read receipts still need to close the loop. For significant work, close with a curated update, proposal, or explicit no-durable-change marker. See [examples/automation-hygiene.md](examples/automation-hygiene.md).
 
 ## Why This Exists
 
@@ -219,6 +228,8 @@ Use /path/to/vault and create a memory closeout for this transcript.
 See [examples/before-after.md](examples/before-after.md) for a minimal synthetic before/after showing how a noisy AI session input becomes curated Obsidian notes without storing the raw transcript.
 
 See [examples/ingest-query-lint.md](examples/ingest-query-lint.md) for the full generic workflow: query existing memory, do the work, ingest durable updates, then lint memory quality.
+
+See [examples/automation-hygiene.md](examples/automation-hygiene.md) for scheduled run behavior: silent empty checks, meaningful closeouts with ledgers, and risky edits converted into patch proposals.
 
 ## Privacy
 

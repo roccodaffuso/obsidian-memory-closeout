@@ -279,6 +279,39 @@ def main() -> int:
     if result is not None:
         return result
 
+    automation_hygiene_terms = (
+        "Automation Hygiene",
+        "No-op automation runs are silent by default",
+        "deterministic preflight gate",
+        "Do not write ledgers for repetitive empty checks",
+        "real work to process",
+    )
+    for rel in (
+        "README.md",
+        "skill/obsidian-memory-closeout/SKILL.md",
+        "docs/QUALITY_CHECKLIST.md",
+        "examples/automation-hygiene.md",
+    ):
+        result = require_terms(root, rel, automation_hygiene_terms)
+        if result is not None:
+            return result
+
+    result = require_terms(
+        root,
+        "examples/automation-hygiene.md",
+        (
+            "Empty Scheduled Run",
+            "Meaningful Scheduled Run",
+            "Risky Edit Becomes Patch Proposal",
+            "Durable memory written",
+            "Automation ledger",
+            "target_hash",
+            "append-to-existing-section",
+        ),
+    )
+    if result is not None:
+        return result
+
     result = require_terms(
         root,
         "docs/QUALITY_CHECKLIST.md",
