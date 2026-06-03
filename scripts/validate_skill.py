@@ -324,6 +324,34 @@ def main() -> int:
     if result is not None:
         return result
 
+    maintenance_loop_terms = (
+        "Optional Maintenance Loop",
+        "maintenance status",
+        "check",
+        "graph refresh",
+        "receipt audit",
+        "Status non-mutating",
+        "Repair/generated refresh",
+        "Canonical modification",
+        "Do not automatically modify project notes",
+        "Git-backed",
+        "protected deletions",
+        "raw clips/cache",
+        "Git conflicts",
+        "possible secrets",
+        "persistent runner",
+        "controlled heartbeat",
+    )
+    for rel in (
+        "README.md",
+        "skill/obsidian-memory-closeout/SKILL.md",
+        "docs/QUALITY_CHECKLIST.md",
+        "examples/maintenance-loop.md",
+    ):
+        result = require_terms(root, rel, maintenance_loop_terms)
+        if result is not None:
+            return result
+
     result = require_terms(
         root,
         "docs/QUALITY_CHECKLIST.md",

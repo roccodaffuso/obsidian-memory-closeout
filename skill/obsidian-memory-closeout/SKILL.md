@@ -1,6 +1,6 @@
 ---
 name: obsidian-memory-closeout
-description: Query existing Obsidian memory before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, automation hygiene findings, lint findings, and optional derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, run scheduled memory automations, or refresh documented derived indexes without storing raw logs or secrets.
+description: Query existing Obsidian memory before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, automation hygiene findings, optional maintenance loops, lint findings, and derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, run scheduled memory automations, run documented vault health checks, or refresh documented derived indexes without storing raw logs or secrets.
 ---
 
 # Obsidian Memory Closeout
@@ -108,6 +108,24 @@ For scheduled or background runs, preserve signal and avoid visible thread clutt
 - If content is processed, produce curated, verifiable output. Never store raw transcripts, full logs, or copied source material.
 - Write automation ledgers only for meaningful runs: promoted memory, archived or processed source material, canonical note changes, actionable blockers, or significant maintenance.
 - Do not write ledgers for repetitive empty checks.
+
+### Optional Maintenance Loop
+
+If the vault documents health or maintenance capabilities, use them before and after a significant closeout. Treat names like `maintenance status`, `check`, `graph refresh`, and `receipt audit` as placeholder examples of vault-provided capabilities, not required commands.
+
+Distinguish maintenance outcomes:
+
+- **Status non-mutating**: inspect health, pending work, stale generated outputs, receipts, or blockers. Do not write notes, ledgers, commits, or threads for empty status.
+- **Repair/generated refresh**: regenerate only derived surfaces such as indexes, graphs, reports, search data, or receipt audits. Canonical Markdown stays unchanged unless separately chosen.
+- **Canonical modification**: project notes, decision notes, preference notes, and reference notes change. Keep this as a separate judged task with a closeout.
+
+Maintenance rules:
+
+- Do not automatically modify project notes, decision notes, preference notes, or canonical references only because a check reports warnings.
+- If a read receipt or equivalent is written, close the loop before the final response with a session/project/decision/reference update, memory proposal, or explicit `no durable memory` reason.
+- For Git-backed vaults, after curated memory changes run available checks, run available generated refreshes, inspect status, create a meaningful commit, and push when appropriate.
+- Stop and report before committing if protected deletions, raw clips/cache, Git conflicts, possible secrets, or unrelated staged files appear.
+- For automations, prefer a persistent runner or controlled heartbeat when available. Do not create continuous new visible threads for no-op checks.
 
 ## Operating Model
 

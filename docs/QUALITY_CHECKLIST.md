@@ -20,6 +20,9 @@ Use this checklist when reviewing the repository or preparing a release.
 - No-op automation runs are silent by default. Automation hygiene uses a deterministic preflight gate and launches only when there is real work to process. Do not write ledgers for repetitive empty checks.
 - Workflow outcomes distinguish status-only checks, significant reviews, and durable memory updates.
 - Automations exit without side effects when `pending_count` is `0`.
+- Optional maintenance loops distinguish status non-mutating, repair/generated refresh, and canonical modification.
+- Do not automatically modify project notes, decision notes, preference notes, or canonical references only because a maintenance check reports warnings.
+- Maintenance capability examples such as `maintenance status`, `check`, `graph refresh`, and `receipt audit` remain optional vault-documented placeholders.
 
 ## Repository Quality
 
@@ -46,3 +49,5 @@ Use this checklist when reviewing the repository or preparing a release.
 - Patch proposals validate target existence, content hash freshness, required structure, and privacy before safe apply.
 - Empty automation checks do not create durable no-op notes, read receipts, ledgers, commits, or user-visible thread summaries.
 - Significant reviews close the loop with a curated update, proposal, or explicit `no durable memory` reason.
+- Git-backed maintenance stops before commit on protected deletions, raw clips/cache, Git conflicts, possible secrets, or unrelated staged files.
+- Automation maintenance prefers a persistent runner or controlled heartbeat instead of continuous visible no-op threads.

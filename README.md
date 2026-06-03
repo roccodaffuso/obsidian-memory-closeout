@@ -19,6 +19,7 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Distinguishes status-only checks, significant reviews, and durable memory updates.
 - Uses checked patch proposals when a canonical memory edit is clear but direct writing is risky or review-worthy.
 - Keeps scheduled automation runs quiet when there is no real memory work to process.
+- Supports optional vault maintenance loops for health checks and generated refreshes.
 - Finds or asks for the target Obsidian vault and follows existing vault conventions first.
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify or other derived indexes without treating them as the source of truth.
@@ -55,6 +56,20 @@ Read receipts, significant reviews, and memory edits must close the loop before 
 - **Status-only**: a preflight or review found nothing new or durable. Return a short status only when requested; do not create notes, ledgers, commits, threads, or read receipts.
 - **Significant review**: memory or inbox material was meaningfully reviewed. Close with a curated update, proposal, or `no durable memory` reason.
 - **Durable memory update**: canonical notes changed. Run local checks, refresh documented indexes/graphs when supported, inspect Git status, and checkpoint meaningful changes.
+
+## Optional Maintenance Loop
+
+Some vaults expose health or maintenance capabilities. Treat names like `maintenance status`, `check`, `graph refresh`, and `receipt audit` as placeholder examples of vault-provided capabilities, not required commands.
+
+For significant closeouts, run documented health or maintenance checks before and after the curated update when available. Keep the outcomes separate:
+
+- **Status non-mutating**: inspect health, pending work, stale generated outputs, receipts, or blockers without writing notes, ledgers, commits, or threads for empty status.
+- **Repair/generated refresh**: regenerate only derived surfaces such as indexes, graphs, reports, search data, or receipt audits.
+- **Canonical modification**: update project notes, decision notes, preference notes, or references only as a separate judged task.
+
+Do not automatically modify project notes, decision notes, preference notes, or canonical references only because a check reports warnings. For Git-backed vaults, after curated memory changes run available checks, run available generated refreshes, inspect status, create a meaningful commit, and push when appropriate. Stop before committing if protected deletions, raw clips/cache, Git conflicts, possible secrets, or unrelated staged files appear.
+
+For automations, prefer a persistent runner or controlled heartbeat when available, and avoid continuous new visible threads for no-op checks. See [examples/maintenance-loop.md](examples/maintenance-loop.md).
 
 ## Why This Exists
 
@@ -209,6 +224,7 @@ The validation checks that:
 - Graphify runtime guidance is packaged with the skill.
 - Checked memory edit guidance is packaged with the skill.
 - Automation hygiene and workflow outcome guidance are covered.
+- Optional maintenance loop guidance is covered.
 - Sanitized examples contain expected frontmatter.
 - Packaging produces a zip with the expected skill files.
 - The repository does not contain common secret-like patterns.
@@ -240,6 +256,8 @@ See [examples/before-after.md](examples/before-after.md) for a minimal synthetic
 See [examples/ingest-query-lint.md](examples/ingest-query-lint.md) for the full generic workflow: query existing memory, do the work, ingest durable updates, then lint memory quality.
 
 See [examples/automation-hygiene.md](examples/automation-hygiene.md) for scheduled run behavior: silent empty checks, meaningful closeouts with ledgers, and risky edits converted into patch proposals.
+
+See [examples/maintenance-loop.md](examples/maintenance-loop.md) for optional vault health checks, generated refreshes, and canonical-change guardrails.
 
 ## Privacy
 
