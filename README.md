@@ -26,14 +26,14 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify or other derived indexes without treating them as the source of truth.
 
-## What's New In v0.2.0
+## What's New In v0.3.0
 
-- Proactive memory workflow: agents can decide when durable information should update memory instead of waiting for an explicit closeout request.
-- Generic **Before Work / During Work / Closeout** loop for reading memory, tracking durable changes, and writing curated summaries.
-- Optional derived graph/index refreshes that use the vault's documented workflow instead of hardcoded setup.
-- Stronger deletion and staging guardrails before committing memory changes.
-- Better web clip review guidance for promoting only durable summaries from inbox source material.
-- Public safety audit checks for private paths, secrets, raw transcript markers, and non-synthetic examples.
+- Retrieval-aware read-before-work: agents treat read sets as operational input and use coverage warnings before assuming completeness.
+- Retrieval signals: project state, wikilinks, graph relations, entity matches, keyword/BM25, recency, status, confidence, and coverage.
+- ADD-only / proposal-first guidance to avoid aggressive canonical rewrites and preserve durable memory history.
+- Stronger read receipt closeout discipline with explicit `no durable memory` / `no durable change` outcomes.
+- Automation hygiene and optional maintenance loops for silent no-op runs, generated refreshes, and Git-backed vault handoff.
+- Generated surfaces and retrieval eval guidance for dashboards, indexes, graph outputs, entity registries, audit ledgers, and ranking checks.
 
 ## Checked Memory Edits
 
