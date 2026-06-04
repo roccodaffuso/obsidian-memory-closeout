@@ -148,19 +148,19 @@ When using Graphify, keep `.graphifyignore` privacy-aware and avoid indexing raw
 
 ```text
 .
-├── skill/obsidian-memory-closeout/   # Installable agent skill package
-├── examples/                         # Sanitized example outputs
-├── assets/                           # Public repository images
-├── docs/                             # Claude, Graphify, web clip, release, and quality docs
-├── scripts/                          # Repo validation and packaging helpers
-├── .github/workflows/validate.yml     # CI validation
-├── PRIVACY.md                        # Privacy model and public repo boundaries
+├── skill/obsidian-memory-closeout/    # Installable agent skill package
+├── examples/                          # Synthetic, privacy-safe examples
+├── assets/                            # Public repository images
+├── docs/                              # Claude, Graphify, web clip, release, and quality docs
+├── scripts/                           # Install, validation, and packaging helpers
+├── .github/workflows/validate.yml      # CI validation workflow
+├── AGENTS.md                          # Guidance for agents editing this repo
+├── CONTRIBUTING.md                    # Contribution and public-safety rules
+├── PRIVACY.md                         # Privacy model and boundaries
+├── SECURITY.md                        # Security reporting policy
+├── LICENSE                            # MIT license
 └── README.md
 ```
-
-## GitHub Social Preview
-
-The social preview image is available at [assets/social-preview.png](assets/social-preview.png). To set it manually, open the GitHub repository settings, go to **General** -> **Social preview**, and upload that file.
 
 ## Install
 
