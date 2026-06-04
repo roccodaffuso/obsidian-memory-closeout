@@ -148,7 +148,7 @@ When using Graphify, keep `.graphifyignore` privacy-aware and avoid indexing raw
 
 ```text
 .
-├── skill/obsidian-memory-closeout/   # Installable Codex skill package
+├── skill/obsidian-memory-closeout/   # Installable agent skill package
 ├── examples/                         # Sanitized example outputs
 ├── assets/                           # Public repository images
 ├── docs/                             # Claude, Graphify, web clip, release, and quality docs
@@ -257,16 +257,22 @@ Restart Codex after copying. Claude Code detects edits to existing skill folders
 
 Graphify support is optional and privacy-aware. The skill integrates with [safishamsi/graphify](https://github.com/safishamsi/graphify), treating Markdown notes as the source of truth and Graphify output as a derived index that can be refreshed after curated notes are written.
 
-When `graphify` is installed, Codex can run:
+When `graphify` is installed, agents can run the bundled helper from the installed skill folder. For Codex:
 
 ```bash
 python3 ~/.codex/skills/obsidian-memory-closeout/scripts/refresh_graphify.py /path/to/vault
 ```
 
+For Claude Code:
+
+```bash
+python3 ~/.claude/skills/obsidian-memory-closeout/scripts/refresh_graphify.py /path/to/vault
+```
+
 Use `--html` if you also want a visual graph artifact:
 
 ```bash
-python3 ~/.codex/skills/obsidian-memory-closeout/scripts/refresh_graphify.py /path/to/vault --html
+python3 /path/to/installed/obsidian-memory-closeout/scripts/refresh_graphify.py /path/to/vault --html
 ```
 
 The skill checks `.graphifyignore` before treating a vault as ready for indexing and should avoid indexing raw transcripts, private dumps, cache folders, and other sensitive source material. See [docs/GRAPHIFY.md](docs/GRAPHIFY.md) for setup, expected outputs, and privacy guardrails.
@@ -308,10 +314,16 @@ The validation checks that:
 
 ## Usage Prompt
 
-After installing, ask Codex something like:
+After installing in Codex, ask:
 
 ```text
 Create a curated memory closeout for this session in my Obsidian vault.
+```
+
+In Claude Code or Claude.ai, use the same intent:
+
+```text
+Use the Obsidian Memory Closeout skill. Query relevant memory before work, then write only curated durable updates.
 ```
 
 For before-work memory lookup:
