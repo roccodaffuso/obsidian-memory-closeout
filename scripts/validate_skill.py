@@ -32,6 +32,7 @@ REQUIRED_ROOT_FILES = (
     "AGENTS.md",
     "LICENSE",
     "docs/GRAPHIFY.md",
+    "docs/CLAUDE.md",
     "docs/QUALITY_CHECKLIST.md",
     "docs/WEB_CLIPS.md",
     ".github/workflows/validate.yml",
@@ -330,6 +331,24 @@ def main() -> int:
             "whole-note replacements are excluded",
         ),
     )
+    if result is not None:
+        return result
+
+    claude_terms = (
+        "Claude Code",
+        "Claude.ai Custom Skill",
+        "~/.claude/skills/obsidian-memory-closeout",
+        ".claude/skills/obsidian-memory-closeout",
+        "dist/obsidian-memory-closeout.zip",
+        "SKILL.md",
+        "scripts/install_claude.sh",
+    )
+    for rel in ("README.md", "docs/CLAUDE.md", "docs/QUALITY_CHECKLIST.md"):
+        result = require_terms(root, rel, claude_terms[:5])
+        if result is not None:
+            return result
+
+    result = require_terms(root, "README.md", ("scripts/install_claude.sh", "custom Skills settings"))
     if result is not None:
         return result
 

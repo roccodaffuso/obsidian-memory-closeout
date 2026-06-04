@@ -22,6 +22,7 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Keeps scheduled automation runs quiet when there is no real memory work to process.
 - Supports optional vault maintenance loops for health checks and generated refreshes.
 - Evaluates retrieval changes when a vault provides eval cases.
+- Works as a standard `SKILL.md` package for Codex, Claude Code, and Claude custom skills.
 - Finds or asks for the target Obsidian vault and follows existing vault conventions first.
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify or other derived indexes without treating them as the source of truth.
@@ -149,7 +150,7 @@ When using Graphify, keep `.graphifyignore` privacy-aware and avoid indexing raw
 ├── skill/obsidian-memory-closeout/   # Installable Codex skill package
 ├── examples/                         # Sanitized example outputs
 ├── assets/                           # Public repository images
-├── docs/                             # Graphify, web clip, release, and quality docs
+├── docs/                             # Claude, Graphify, web clip, release, and quality docs
 ├── scripts/                          # Repo validation and packaging helpers
 ├── .github/workflows/validate.yml     # CI validation
 ├── PRIVACY.md                        # Privacy model and public repo boundaries
@@ -194,7 +195,47 @@ To install somewhere else:
 CODEX_HOME=/path/to/codex ./scripts/install_local.sh
 ```
 
-### Option C: Manual Copy
+### Option C: Claude Code
+
+Clone the repository, then install the same skill folder into your Claude Code skills directory:
+
+```bash
+git clone https://github.com/Nova1390/obsidian-memory-closeout.git
+cd obsidian-memory-closeout
+./scripts/install_claude.sh
+```
+
+By default, the installer copies the skill to:
+
+```text
+~/.claude/skills/obsidian-memory-closeout
+```
+
+To install somewhere else:
+
+```bash
+CLAUDE_HOME=/path/to/claude ./scripts/install_claude.sh
+```
+
+For project-local Claude Code use, copy the skill folder to:
+
+```text
+.claude/skills/obsidian-memory-closeout
+```
+
+See [docs/CLAUDE.md](docs/CLAUDE.md).
+
+### Option D: Claude.ai Custom Skill
+
+Build a ZIP package:
+
+```bash
+python3 scripts/package_skill.py --root .
+```
+
+Upload `dist/obsidian-memory-closeout.zip` in Claude's custom Skills settings. The ZIP contains the `obsidian-memory-closeout/` skill folder at archive root, which is the structure Claude expects.
+
+### Option E: Manual Copy
 
 Copy the installable skill folder to your Codex skills directory:
 
@@ -202,7 +243,14 @@ Copy the installable skill folder to your Codex skills directory:
 cp -R skill/obsidian-memory-closeout ~/.codex/skills/obsidian-memory-closeout
 ```
 
-Restart Codex after copying.
+For Claude Code:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R skill/obsidian-memory-closeout ~/.claude/skills/obsidian-memory-closeout
+```
+
+Restart Codex after copying. Claude Code detects edits to existing skill folders during a session, but starting a fresh session is the simplest verification path.
 
 ## Graphify Integration
 
@@ -224,7 +272,7 @@ The skill checks `.graphifyignore` before treating a vault as ready for indexing
 
 ## Package
 
-Create a distributable zip in `dist/`:
+Create a distributable zip in `dist/` for Claude custom skills or manual distribution:
 
 ```bash
 python3 scripts/package_skill.py
@@ -248,6 +296,7 @@ The validation checks that:
 - `agents/openai.yaml` exists and matches the skill metadata shape.
 - Referenced files exist.
 - Graphify runtime guidance is packaged with the skill.
+- Claude install and packaging guidance is documented.
 - Checked memory edit guidance is packaged with the skill.
 - Automation hygiene and workflow outcome guidance are covered.
 - Optional maintenance loop guidance is covered.

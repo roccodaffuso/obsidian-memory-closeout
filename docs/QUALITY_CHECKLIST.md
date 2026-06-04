@@ -33,11 +33,16 @@ Use this checklist when reviewing the repository or preparing a release.
 ## Repository Quality
 
 - README has install, validate, package, usage, privacy, and license sections.
+- README documents Codex, Claude Code, Claude.ai custom skill, and manual install paths.
+- Claude Code personal install path is documented as `~/.claude/skills/obsidian-memory-closeout`.
+- Claude Code project install path is documented as `.claude/skills/obsidian-memory-closeout`.
+- Claude.ai custom skill package path is documented as `dist/obsidian-memory-closeout.zip`.
 - `AGENTS.md` tells future agents how to avoid privacy mistakes.
 - `CONTRIBUTING.md` and `SECURITY.md` exist.
 - CI runs validation, secret scan, and packaging checks.
 - Release documentation explains how to build and attach the package.
 - Graphify setup and refresh behavior are documented in `docs/GRAPHIFY.md`.
+- Claude install and compatibility behavior is documented in `docs/CLAUDE.md`.
 - Web clip inbox review is documented in `docs/WEB_CLIPS.md`.
 - README documents the `Ingest / Query / Lint` operating model with neutral placeholders.
 

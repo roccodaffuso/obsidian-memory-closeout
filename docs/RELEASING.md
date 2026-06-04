@@ -1,6 +1,6 @@
 # Releasing
 
-This repository can publish releases manually using the generated skill zip.
+This repository can publish releases manually using the generated skill zip. The same zip can be uploaded as a Claude.ai custom skill because it contains the `obsidian-memory-closeout/` skill folder at archive root.
 
 ## Prepare
 
@@ -31,3 +31,5 @@ git push origin v0.1.0
 ## Release Asset
 
 Attach `dist/obsidian-memory-closeout.zip` to the GitHub release if you want users to install from a zip instead of the GitHub directory URL.
+
+For Claude users, mention that the release asset can be uploaded in Claude's custom Skills settings or copied into `~/.claude/skills/obsidian-memory-closeout` for Claude Code.
