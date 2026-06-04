@@ -78,6 +78,7 @@ Use my Obsidian memory closeout skill. Query memory before work, use retrieval s
 ## Compatibility Notes
 
 - `SKILL.md` is the source instruction file.
+- The `description` frontmatter is kept under 200 characters for Claude.ai custom skill compatibility.
 - The directory name `obsidian-memory-closeout` is the command/skill identifier in Claude Code.
 - `agents/openai.yaml` is included for Codex/OpenAI-compatible agents and is harmless for Claude.
 - Scripts are optional helpers; the skill should still work as instructions when a host cannot run scripts.

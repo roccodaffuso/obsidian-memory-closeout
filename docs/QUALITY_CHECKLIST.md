@@ -37,6 +37,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - Claude Code personal install path is documented as `~/.claude/skills/obsidian-memory-closeout`.
 - Claude Code project install path is documented as `.claude/skills/obsidian-memory-closeout`.
 - Claude.ai custom skill package path is documented as `dist/obsidian-memory-closeout.zip`.
+- `SKILL.md` description stays within Claude.ai's 200 characters maximum for custom skill metadata.
 - `AGENTS.md` tells future agents how to avoid privacy mistakes.
 - `CONTRIBUTING.md` and `SECURITY.md` exist.
 - CI runs validation, secret scan, and packaging checks.

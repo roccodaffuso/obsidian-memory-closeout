@@ -31,6 +31,7 @@ REQUIRED_ROOT_FILES = (
     "SECURITY.md",
     "AGENTS.md",
     "LICENSE",
+    "scripts/install_claude.sh",
     "docs/GRAPHIFY.md",
     "docs/CLAUDE.md",
     "docs/QUALITY_CHECKLIST.md",
@@ -130,6 +131,9 @@ def main() -> int:
         if not (root / rel).is_file():
             return fail(f"missing required repository file: {rel}")
 
+    if not (root / "scripts/install_claude.sh").stat().st_mode & 0o111:
+        return fail("scripts/install_claude.sh must be executable")
+
     if not skill_md.is_file():
         return fail(f"missing {skill_md}")
 
@@ -141,8 +145,11 @@ def main() -> int:
     metadata = parse_simple_yaml(match.group("body"))
     if metadata.get("name") != SKILL_NAME:
         return fail("SKILL.md frontmatter name does not match package name")
-    if len(metadata.get("description", "")) < 80:
+    description = metadata.get("description", "")
+    if len(description) < 80:
         return fail("SKILL.md description should be specific enough to trigger reliably")
+    if len(description) > 200:
+        return fail("SKILL.md description should stay within Claude.ai's 200-character limit")
 
     frontmatter_keys = set(parse_simple_yaml(match.group("body")).keys())
     if frontmatter_keys != {"name", "description"}:
@@ -342,9 +349,15 @@ def main() -> int:
         "dist/obsidian-memory-closeout.zip",
         "SKILL.md",
         "scripts/install_claude.sh",
+        "200 characters",
     )
     for rel in ("README.md", "docs/CLAUDE.md", "docs/QUALITY_CHECKLIST.md"):
         result = require_terms(root, rel, claude_terms[:5])
+        if result is not None:
+            return result
+
+    for rel in ("docs/CLAUDE.md", "docs/QUALITY_CHECKLIST.md"):
+        result = require_terms(root, rel, ("200 characters",))
         if result is not None:
             return result
 

@@ -1,6 +1,6 @@
 ---
 name: obsidian-memory-closeout
-description: Query existing Obsidian memory and retrieval signals before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, automation hygiene findings, optional maintenance loops, retrieval eval findings, lint findings, and derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, run scheduled memory automations, run documented vault health or retrieval checks, or refresh documented derived indexes without storing raw logs or secrets.
+description: Query Obsidian memory before work and write privacy-safe closeouts, proposals, decisions, web clip reviews, automation hygiene, maintenance checks, retrieval evals, and generated refreshes.
 ---
 
 # Obsidian Memory Closeout
