@@ -1,4 +1,4 @@
 interface:
   display_name: "Obsidian Memory Closeout"
   short_description: "Query, ingest, lint, and maintain Obsidian memory"
-  default_prompt: "Query relevant memory in my Obsidian vault before work, then classify status-only checks, significant reviews, durable memory updates, and optional maintenance loops; keep no-op automations silent, close the loop with curated memory or a no durable memory reason, use patch proposals for risky canonical edits, run documented checks and generated refreshes when available, lint memory quality, review web clips if relevant, and refresh documented derived indexes if available."
+  default_prompt: "Query relevant memory and retrieval signals in my Obsidian vault before work, treat read sets as operational input, classify status-only checks, significant reviews, durable memory updates, and optional maintenance loops; keep no-op automations silent, close read receipts with curated memory or a no durable memory reason, prefer ADD-only proposals over aggressive rewrites, run documented checks, retrieval evals, and generated refreshes when available, and report the final response contract."

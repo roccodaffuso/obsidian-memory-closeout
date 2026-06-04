@@ -204,11 +204,89 @@ def main() -> int:
             "During Work",
             "Closeout",
             "proactively decide",
+            "Retrieval Signals",
+            "retrieval packs",
+            "brain_read.py",
+            "operational input",
+            "coverage is low or medium",
             "schema",
             "links",
             "privacy",
             "stale decisions",
             "coverage gaps",
+        ),
+    )
+    if result is not None:
+        return result
+
+    retrieval_workflow_terms = (
+        "Read Before Work",
+        "Retrieval Signals",
+        "ADD-only / Proposal-first",
+        "Generated Surfaces",
+        "Retrieval Evaluation",
+        "Final Response Contract",
+        "project state",
+        "wikilink/direct link",
+        "graph relation",
+        "entity match",
+        "keyword/BM25",
+        "recency",
+        "status",
+        "confidence",
+        "coverage",
+        "archived",
+        "superseded",
+        "stale",
+        "review-expired",
+        "advisory",
+        "source of truth",
+        "no durable memory",
+    )
+    for rel in (
+        "README.md",
+        "skill/obsidian-memory-closeout/SKILL.md",
+        "docs/QUALITY_CHECKLIST.md",
+        "examples/retrieval-closeout.md",
+    ):
+        result = require_terms(root, rel, retrieval_workflow_terms)
+        if result is not None:
+            return result
+
+    result = require_terms(
+        root,
+        "skill/obsidian-memory-closeout/SKILL.md",
+        (
+            "session summaries",
+            "reference summaries",
+            "decision proposals",
+            "memory proposals",
+            "Do not delete canonical memory",
+            "replacement links",
+            "Significant receipts must not remain orphaned",
+            "Do not create read receipts for noisy micro-tasks",
+            "dashboards, indexes, graph JSON/report, entity registry, retrieval evaluation, and audit ledger",
+            "raw article text",
+            "If evals fail, correct ranking",
+            "Do not ignore failures",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "examples/retrieval-closeout.md",
+        (
+            "brain_read.py \"<project>\"",
+            "Coverage is medium",
+            "Archived Notification Experiment",
+            "Review-Expired Preference Draft",
+            "memory proposal",
+            "checkpoint commit",
+            "Generated surfaces are not source of truth",
+            "Forbidden as current truth",
+            "Related updates",
         ),
     )
     if result is not None:

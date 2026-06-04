@@ -12,6 +12,7 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 ## What It Does
 
 - Queries relevant existing notes, decisions, open loops, and references before work.
+- Uses retrieval signals and coverage warnings to make read-before-work more reliable.
 - Ingests durable updates from a session, transcript, web clip, or completed task.
 - Writes concise session summaries, decisions, project updates, references, or inbox proposals.
 - Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
@@ -20,6 +21,7 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Uses checked patch proposals when a canonical memory edit is clear but direct writing is risky or review-worthy.
 - Keeps scheduled automation runs quiet when there is no real memory work to process.
 - Supports optional vault maintenance loops for health checks and generated refreshes.
+- Evaluates retrieval changes when a vault provides eval cases.
 - Finds or asks for the target Obsidian vault and follows existing vault conventions first.
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify or other derived indexes without treating them as the source of truth.
@@ -57,6 +59,20 @@ Read receipts, significant reviews, and memory edits must close the loop before 
 - **Significant review**: memory or inbox material was meaningfully reviewed. Close with a curated update, proposal, or `no durable memory` reason.
 - **Durable memory update**: canonical notes changed. Run local checks, refresh documented indexes/graphs when supported, inspect Git status, and checkpoint meaningful changes.
 
+## Read Before Work And Retrieval
+
+Before meaningful work on an existing project, decision, preference, or open loop, read relevant memory first. Use dashboard/index notes, retrieval packs, project notes, decision notes, references, open loops, and optional entrypoints such as `brain_read.py "<project>"` when the vault documents them.
+
+Treat the read set as operational input. If coverage is low or medium, state uncertainty and inspect sources before assuming completeness.
+
+When available, briefly report retrieval signals that explain relevance: project state, wikilink/direct link, graph relation, entity match, keyword/BM25, recency, status, confidence, and coverage. Archived, superseded, stale, or review-expired notes are historical context, not current truth. Signals are advisory, not canonical memory.
+
+## ADD-only / Proposal-first
+
+Default to adding curated memory instead of aggressively rewriting canonical notes. New observations should become session summaries, reference summaries, decision proposals, memory proposals, or ledgers.
+
+Update canonical notes only when placement and content are clear. For delicate or review-worthy edits, create a patch/proposal instead of editing directly. Do not delete canonical memory; use `archived`, `superseded`, or replacement links.
+
 ## Optional Maintenance Loop
 
 Some vaults expose health or maintenance capabilities. Treat names like `maintenance status`, `check`, `graph refresh`, and `receipt audit` as placeholder examples of vault-provided capabilities, not required commands.
@@ -70,6 +86,16 @@ For significant closeouts, run documented health or maintenance checks before an
 Do not automatically modify project notes, decision notes, preference notes, or canonical references only because a check reports warnings. For Git-backed vaults, after curated memory changes run available checks, run available generated refreshes, inspect status, create a meaningful commit, and push when appropriate. Stop before committing if protected deletions, raw clips/cache, Git conflicts, possible secrets, or unrelated staged files appear.
 
 For automations, prefer a persistent runner or controlled heartbeat when available, and avoid continuous new visible threads for no-op checks. See [examples/maintenance-loop.md](examples/maintenance-loop.md).
+
+## Generated Surfaces And Retrieval Eval
+
+Dashboards, indexes, graph JSON/report, entity registry, retrieval evaluation, and audit ledger are generated surfaces. Regenerate them after curated changes when the vault documents that workflow, but do not treat them as source of truth if they conflict with canonical Markdown.
+
+Do not import raw transcript or raw article text into public or canonical generated surfaces. If retrieval eval cases exist, run them after changes to ranking or read flow. Evals should verify that the right notes are retrieved and that stale, forbidden, or review-expired notes do not rank as current truth.
+
+## Final Response Contract
+
+At the end of a significant task, report what changed, which checks ran, what remains to do, whether the public skill or related tools/projects should be updated, and why there was `no durable memory` if nothing was updated.
 
 ## Why This Exists
 
@@ -225,6 +251,7 @@ The validation checks that:
 - Checked memory edit guidance is packaged with the skill.
 - Automation hygiene and workflow outcome guidance are covered.
 - Optional maintenance loop guidance is covered.
+- Read-before-work, retrieval signals, generated surfaces, retrieval eval, and final response contract guidance are covered.
 - Sanitized examples contain expected frontmatter.
 - Packaging produces a zip with the expected skill files.
 - The repository does not contain common secret-like patterns.
@@ -258,6 +285,8 @@ See [examples/ingest-query-lint.md](examples/ingest-query-lint.md) for the full 
 See [examples/automation-hygiene.md](examples/automation-hygiene.md) for scheduled run behavior: silent empty checks, meaningful closeouts with ledgers, and risky edits converted into patch proposals.
 
 See [examples/maintenance-loop.md](examples/maintenance-loop.md) for optional vault health checks, generated refreshes, and canonical-change guardrails.
+
+See [examples/retrieval-closeout.md](examples/retrieval-closeout.md) for read-before-work, retrieval signals, proposal-first updates, and final response contract behavior.
 
 ## Privacy
 

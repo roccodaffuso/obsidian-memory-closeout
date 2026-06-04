@@ -1,6 +1,6 @@
 ---
 name: obsidian-memory-closeout
-description: Query existing Obsidian memory before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, automation hygiene findings, optional maintenance loops, lint findings, and derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, run scheduled memory automations, run documented vault health checks, or refresh documented derived indexes without storing raw logs or secrets.
+description: Query existing Obsidian memory and retrieval signals before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, automation hygiene findings, optional maintenance loops, retrieval eval findings, lint findings, and derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, run scheduled memory automations, run documented vault health or retrieval checks, or refresh documented derived indexes without storing raw logs or secrets.
 ---
 
 # Obsidian Memory Closeout
@@ -28,9 +28,12 @@ Before querying or writing, inspect local conventions: `AGENTS.md`, `.gitignore`
 
 ### Before Work / Query
 
+Read Before Work is mandatory before meaningful work on an existing project, decision, preference, or open loop when relevant memory is available.
+
 When a vault path or memory contract is available before meaningful work, read relevant existing memory before acting. Search or inspect:
 
 - Dashboard or index notes for orientation and active areas.
+- Retrieval packs or read sets when the vault exposes them.
 - Project and area notes for current state, goals, constraints, and next actions.
 - Decision notes for active choices, rejected alternatives, and revisit dates.
 - Session notes for recent changes and unresolved open loops.
@@ -38,7 +41,27 @@ When a vault path or memory contract is available before meaningful work, read r
 - Reviewed web clip proposals or inbox items, but not raw clipping dumps.
 - Proposal notes when canonical memory placement is still unresolved.
 
-Use the smallest useful context set. If no relevant memory exists, continue with the current task and note the coverage gap during linting.
+If the vault documents an entrypoint such as `brain_read.py "<project>"`, use it as an optional read-before-work entrypoint, not as a required command.
+
+Treat the read set as operational input, not background reading. Use it to constrain assumptions, choose next steps, and avoid repeating stale decisions.
+
+Use the smallest useful context set. If no relevant memory exists, continue with the current task and note the coverage gap during linting. If coverage is low or medium, state uncertainty and inspect sources before assuming completeness.
+
+### Retrieval Signals
+
+When available, read and briefly report why retrieved notes are relevant. Generic signals include:
+
+- Project state.
+- Wikilink/direct link.
+- Graph relation.
+- Entity match.
+- Keyword/BM25 match.
+- Recency.
+- Status.
+- Confidence.
+- Coverage.
+
+Archived, superseded, stale, or review-expired notes are historical context, not current truth. Retrieval signals are advisory ranking evidence, not canonical memory.
 
 ### During Work
 
@@ -67,6 +90,15 @@ At natural stopping points, write only curated durable summaries:
 
 Then lint memory quality, run configured checks, and refresh documented derived indexes or graphs when available.
 
+### ADD-only / Proposal-first
+
+Default to adding curated memory instead of aggressively rewriting canonical notes.
+
+- New observations become session summaries, reference summaries, decision proposals, memory proposals, or ledgers.
+- Update canonical notes only when placement and content are clear.
+- For delicate, stale-prone, concurrent, or review-worthy edits, create a patch/proposal instead of editing directly.
+- Do not delete canonical memory. Use `archived`, `superseded`, or replacement links when memory is no longer current.
+
 ### Outcome Classification
 
 Classify each memory workflow before writing:
@@ -84,6 +116,8 @@ Close the loop before the final response when you create a read receipt, process
 - Decision.
 - Reference or proposal.
 - Explicit `no durable memory` reason for status-only, read-only advisory, or tiny tasks.
+- Explicit `no durable change` reason when the read receipt led to no durable update.
+- Checkpoint commit when the repository or vault uses Git and meaningful files changed.
 
 If memory files changed:
 
@@ -94,6 +128,8 @@ If memory files changed:
 - Create a checkpoint commit when appropriate.
 
 Consolidate repeated micro-receipts from the same work stream into one closeout note. If receipt classification is wrong for a repeated pattern, update the classifier or rules instead of only patching the individual receipt.
+
+Do not create read receipts for noisy micro-tasks. Significant receipts must not remain orphaned.
 
 ### Automation Hygiene
 
@@ -244,9 +280,34 @@ Some vaults maintain derived graph, search, or index artifacts. Markdown notes r
 - Do not invent graph/index commands when the vault has no documented workflow.
 - If derived outputs are expected, verify they were regenerated and include them in quality checks.
 - Do not treat Graphify, any knowledge graph tool, or any private output path as mandatory for every vault.
+- Treat dashboards, indexes, graph JSON/report, entity registry, retrieval evaluation, and audit ledger as generated surfaces.
 - Do not index raw transcript folders, unreviewed web clips, caches, secrets, or private dumps unless the documented workflow explicitly allows it.
+- Do not import raw transcript or raw article text into public or canonical generated surfaces.
+- If generated surfaces conflict with canonical Markdown, treat canonical Markdown as the source of truth and report the mismatch.
 
 Read `references/graphify.md` only when the vault documents Graphify or the user asks for it.
+
+## Retrieval Evaluation
+
+If the project has retrieval eval cases, run them after changes to ranking, read-before-work flow, retrieval packs, or generated retrieval surfaces.
+
+Eval cases should check:
+
+- The right notes are retrieved for representative tasks.
+- Stale, archived, superseded, forbidden, or review-expired notes do not rank as current truth.
+- Coverage, confidence, status, and recency signals are interpreted as advisory.
+
+If evals fail, correct ranking, retrieval rules, or eval expectations. Do not ignore failures.
+
+## Final Response Contract
+
+At the end of each significant task, report:
+
+- What changed.
+- Which checks ran.
+- What remains to do.
+- Whether the public skill or related tools/projects should be updated.
+- If nothing was updated, why there was `no durable memory`.
 
 ## Safety and Deletion Guardrails
 

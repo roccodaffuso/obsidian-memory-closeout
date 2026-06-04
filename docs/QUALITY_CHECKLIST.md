@@ -13,6 +13,12 @@ Use this checklist when reviewing the repository or preparing a release.
 - Graphify guidance explains derived-index behavior and privacy boundaries.
 - The skill treats memory as both input and output: Query before work, Ingest durable updates, and Lint quality before handoff.
 - The skill has a generic Before Work / During Work / Closeout workflow.
+- Read-before-work uses dashboard/index notes, retrieval packs, optional entrypoints such as `brain_read.py "<project>"`, and coverage warnings as operational input.
+- Retrieval signals cover project state, wikilink/direct link, graph relation, entity match, keyword/BM25, recency, status, confidence, and coverage.
+- Archived, superseded, stale, or review-expired notes are historical context, not current truth.
+- ADD-only / Proposal-first behavior avoids aggressive canonical rewrites and uses proposals for delicate edits.
+- Read Before Work, Retrieval Signals, ADD-only / Proposal-first, Generated Surfaces, Retrieval Evaluation, and Final Response Contract are documented.
+- Retrieval signals are advisory and generated surfaces are not the source of truth.
 - Derived graph/index refreshes are optional and use documented vault commands rather than hardcoded private setup.
 - Web clip guidance treats `00_Inbox/Web Clips/raw` as unreviewed source material, not canonical memory.
 - Significant read receipts must close the loop with a curated update, proposal, or explicit no-durable-change marker.
@@ -51,3 +57,6 @@ Use this checklist when reviewing the repository or preparing a release.
 - Significant reviews close the loop with a curated update, proposal, or explicit `no durable memory` reason.
 - Git-backed maintenance stops before commit on protected deletions, raw clips/cache, Git conflicts, possible secrets, or unrelated staged files.
 - Automation maintenance prefers a persistent runner or controlled heartbeat instead of continuous visible no-op threads.
+- Generated surfaces include dashboards, indexes, graph JSON/report, entity registry, retrieval evaluation, and audit ledger; canonical Markdown remains source of truth.
+- Retrieval evals verify expected notes are recovered and stale or forbidden notes do not rank as current truth.
+- Final response contract reports changes, checks, remaining work, related updates, and `no durable memory` when nothing changed.
