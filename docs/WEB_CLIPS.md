@@ -18,6 +18,12 @@ Recommended `.gitignore` and `.graphifyignore` entries:
 00_Inbox/Web Clips/raw/
 ```
 
+## Optional Extraction
+
+If the vault documents a web extraction tool such as Defuddle, use it only as pre-processing to reduce page clutter before review. Clean extracted Markdown can make summarization easier, but it remains source material.
+
+Do not treat extracted Markdown or raw article text as canonical memory. Promote only durable summaries with source URL, context, links, and a clear destination note.
+
 ## Promotion Criteria
 
 Promote a web clip only when it:
@@ -41,11 +47,12 @@ Reject or delete a raw clip when it is:
 ## Review Workflow
 
 1. Inspect the raw clip only long enough to decide whether it has durable value.
-2. Capture source URL, title, author or publisher when available, and retrieval context.
-3. Summarize the reusable idea in your own words.
-4. Link the summary to a destination note.
-5. Remove or leave ignored the raw clip according to the vault's retention policy.
-6. Lint for privacy, links, duplicates, and coverage gaps.
+2. Optionally run a documented extraction tool to remove navigation, ads, and page chrome.
+3. Capture source URL, title, author or publisher when available, and retrieval context.
+4. Summarize the reusable idea in your own words.
+5. Link the summary to a destination note.
+6. Remove or leave ignored the raw clip according to the vault's retention policy.
+7. Lint for privacy, links, duplicates, and coverage gaps.
 
 ## Example
 

@@ -234,6 +234,8 @@ Browser and web clippings are unreviewed source material, not canonical memory. 
 
 Raw clips should be ignored by Git and indexing by default. Promote only durable summaries. Leave ambiguous clips pending with a reason. Do not commit full clipped articles unless the user explicitly wants that and copyright/privacy policy allows it. Read `references/web-clips.md` for promotion and rejection criteria.
 
+If available, use a documented extraction tool to reduce clutter before summarizing; never store full raw article text as canonical memory.
+
 ### Lint
 
 Lint means validating memory quality before handoff. Check:

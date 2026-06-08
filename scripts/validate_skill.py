@@ -367,6 +367,21 @@ def main() -> int:
 
     result = require_terms(
         root,
+        "README.md",
+        (
+            "Agent Skills",
+            "Codex, Claude Code, Claude.ai custom skills",
+            "kepano/obsidian-skills",
+            "Related Obsidian Skills",
+            "npx skills add",
+            "--full-depth",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
         "CONTRIBUTING.md",
         ("Update public documentation whenever behavior changes", "README.md", "docs/", "examples", "validation"),
     )
@@ -526,10 +541,27 @@ def main() -> int:
             "Promote only durable summaries",
             "Leave ambiguous clips pending with a reason",
             "Do not commit full clipped articles",
+            "documented extraction tool",
+            "raw article text",
+            "canonical memory",
         ),
     )
     if result is not None:
         return result
+
+    web_clip_extraction_terms = (
+        "Defuddle",
+        "extraction",
+        "pre-processing",
+        "extracted Markdown",
+        "raw article text",
+        "canonical memory",
+        "source material",
+    )
+    for rel in ("README.md", "docs/WEB_CLIPS.md", "examples/web-clip-review.md", "docs/QUALITY_CHECKLIST.md"):
+        result = require_terms(root, rel, web_clip_extraction_terms)
+        if result is not None:
+            return result
 
     example_memory_terms = (
         "Agent First Reads Existing Memory",

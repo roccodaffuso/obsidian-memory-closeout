@@ -32,6 +32,24 @@ Recommended ignore entry:
 00_Inbox/Web Clips/raw/
 ```
 
+## Optional Extraction Step
+
+If the vault documents an extraction tool such as Defuddle, the agent may use it as pre-processing to create cleaner source material before review. The extracted Markdown is still not canonical memory.
+
+Example extracted summary:
+
+```markdown
+Source URL: https://example.org/articles/notification-patterns
+Title: Notification Patterns For Example Apps
+Extraction: cleaned Markdown summary, not a full article dump
+
+- The source compares weekly summaries, daily alerts, and event-triggered notifications.
+- It recommends clear defaults and user-controlled cadence for routine updates.
+- It warns against making high-frequency alerts the default for low-urgency events.
+```
+
+The extracted summary helps review the source without committing raw article text.
+
 ## Review
 
 Promotion criteria:

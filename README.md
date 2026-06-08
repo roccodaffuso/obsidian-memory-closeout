@@ -9,23 +9,14 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 
 `obsidian-memory-closeout` is a privacy-first skill for using an Obsidian-compatible vault as both input and output. It helps agents query existing memory before work, ingest durable updates afterward, and keep the vault useful without storing raw transcripts, secrets, credentials, or noisy logs.
 
+The installable package follows the Agent Skills `SKILL.md` format for Codex, Claude Code, Claude.ai custom skills, and other compatible agents.
+
 ## What It Does
 
-- Queries relevant existing notes, decisions, open loops, and references before work.
-- Uses retrieval signals and coverage warnings to make read-before-work more reliable.
-- Ingests durable updates from a session, transcript, web clip, or completed task.
-- Writes concise session summaries, decisions, project updates, references, or inbox proposals.
-- Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
-- Reviews web clips as unreviewed inbox material before promoting them into canonical notes.
-- Distinguishes status-only checks, significant reviews, and durable memory updates.
-- Uses checked patch proposals when a canonical memory edit is clear but direct writing is risky or review-worthy.
-- Keeps scheduled automation runs quiet when there is no real memory work to process.
-- Supports optional vault maintenance loops for health checks and generated refreshes.
-- Evaluates retrieval changes when a vault provides eval cases.
-- Works as a standard `SKILL.md` package for Codex, Claude Code, and Claude custom skills.
-- Finds or asks for the target Obsidian vault and follows existing vault conventions first.
-- Runs a local secret scan before committing or handing off.
-- Refreshes Graphify or other derived indexes without treating them as the source of truth.
+- **Query**: read relevant notes, decisions, open loops, references, retrieval signals, and coverage warnings before meaningful work.
+- **Ingest**: convert durable updates from sessions, transcripts, web clips, or completed tasks into concise session summaries, decisions, project updates, references, or proposals.
+- **Lint**: check schema, links, privacy, stale decisions, duplicated/noisy notes, coverage gaps, and secret-like content before handoff.
+- **Maintain**: keep no-op automations quiet, use checked patch proposals for risky canonical edits, run optional maintenance loops, evaluate retrieval changes, and refresh Graphify or other derived indexes without treating them as source of truth.
 
 ## What's New In v0.3.1
 
@@ -132,6 +123,8 @@ Browser and web clippings are source material, not canonical memory. A generic i
 
 Raw clips should be ignored by Git and indexing by default, then reviewed for promotion into curated notes. Promote a clip only when it is durable beyond the moment, has a clear source URL/context, is privacy-safe, can be summarized without storing the full raw content, and has a clear destination note. Reject one-off reading, full article dumps, private/account data, secrets or credentials, and low-quality or duplicate sources.
 
+If a vault documents an extraction tool such as Defuddle, use it only as optional pre-processing to reduce page clutter before review. Extracted Markdown and raw article text remain source material, not canonical memory; promote only curated summaries.
+
 Promotion criteria: durable beyond the moment, clear source URL/context, privacy-safe, summarizable without full raw content, and clear destination note.
 
 Rejection criteria: one-off reading, full article dumps, private/account data, secrets or credentials, and low-quality or duplicate sources.
@@ -143,6 +136,10 @@ See [docs/WEB_CLIPS.md](docs/WEB_CLIPS.md) and [examples/web-clip-review.md](exa
 Markdown notes remain the source of truth. Graphify or other derived indexes can be refreshed after curated notes are written, but generated graph data should not replace canonical notes.
 
 When using Graphify, keep `.graphifyignore` privacy-aware and avoid indexing raw transcripts, private dumps, caches, and unreviewed web clips. See [docs/GRAPHIFY.md](docs/GRAPHIFY.md).
+
+## Related Obsidian Skills
+
+[kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) is complementary to this repository. It focuses on Obsidian-oriented skill coverage such as Markdown, Bases, Canvas, and CLI workflows. `obsidian-memory-closeout` stays focused on operational memory governance: read-before-work, curated closeouts, privacy, no raw transcripts, web clip review, and optional derived-index refreshes.
 
 ## Repository Layout
 
@@ -253,6 +250,16 @@ cp -R skill/obsidian-memory-closeout ~/.claude/skills/obsidian-memory-closeout
 
 Restart Codex after copying. Claude Code detects edits to existing skill folders during a session, but starting a fresh session is the simplest verification path.
 
+### Option F: Agent Skills CLI
+
+If your agent environment supports the Agent Skills CLI, install the skill from the repository with a full-depth search:
+
+```bash
+npx skills add https://github.com/Nova1390/obsidian-memory-closeout --full-depth --skill obsidian-memory-closeout
+```
+
+Use the release ZIP or manual install options above if your environment does not support `npx skills add`.
+
 ## Graphify Integration
 
 Graphify support is optional and privacy-aware. The skill integrates with [safishamsi/graphify](https://github.com/safishamsi/graphify), treating Markdown notes as the source of truth and Graphify output as a derived index that can be refreshed after curated notes are written.
@@ -304,9 +311,11 @@ The validation checks that:
 - Referenced files exist.
 - Graphify runtime guidance is packaged with the skill.
 - Claude install and packaging guidance is documented.
+- Agent Skills compatibility and related Obsidian skill guidance are documented.
 - Checked memory edit guidance is packaged with the skill.
 - Automation hygiene and workflow outcome guidance are covered.
 - Optional maintenance loop guidance is covered.
+- Optional web clip extraction guidance is documented without treating raw article text as canonical memory.
 - Read-before-work, retrieval signals, generated surfaces, retrieval eval, and final response contract guidance are covered.
 - Sanitized examples contain expected frontmatter.
 - Packaging produces a zip with the expected skill files.

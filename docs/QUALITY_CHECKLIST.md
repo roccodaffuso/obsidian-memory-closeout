@@ -11,6 +11,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - Every referenced file exists.
 - Scripts are deterministic and have been run locally.
 - Graphify guidance explains derived-index behavior and privacy boundaries.
+- README states Agent Skills compatibility for Codex, Claude Code, Claude.ai custom skills, and compatible agents.
 - The skill treats memory as both input and output: Query before work, Ingest durable updates, and Lint quality before handoff.
 - The skill has a generic Before Work / During Work / Closeout workflow.
 - Read-before-work uses dashboard/index notes, retrieval packs, optional entrypoints such as `brain_read.py "<project>"`, and coverage warnings as operational input.
@@ -21,6 +22,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - Retrieval signals are advisory and generated surfaces are not the source of truth.
 - Derived graph/index refreshes are optional and use documented vault commands rather than hardcoded private setup.
 - Web clip guidance treats `00_Inbox/Web Clips/raw` as unreviewed source material, not canonical memory.
+- Optional extraction tools such as Defuddle are documented as pre-processing only; extracted Markdown and raw article text remain source material, not canonical memory.
 - Significant read receipts must close the loop with a curated update, proposal, or explicit no-durable-change marker.
 - Checked memory edits use direct writes only for low-risk updates and patch proposals for risky or review-worthy canonical changes.
 - No-op automation runs are silent by default. Automation hygiene uses a deterministic preflight gate and launches only when there is real work to process. Do not write ledgers for repetitive empty checks.
@@ -34,6 +36,8 @@ Use this checklist when reviewing the repository or preparing a release.
 
 - README has install, validate, package, usage, privacy, and license sections.
 - README documents Codex, Claude Code, Claude.ai custom skill, and manual install paths.
+- README links [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) as a complementary Obsidian skills repository.
+- README documents Agent Skills CLI installation with full-depth discovery or points users to release ZIP/manual install.
 - Claude Code personal install path is documented as `~/.claude/skills/obsidian-memory-closeout`.
 - Claude Code project install path is documented as `.claude/skills/obsidian-memory-closeout`.
 - Claude.ai custom skill package path is documented as `dist/obsidian-memory-closeout.zip`.
