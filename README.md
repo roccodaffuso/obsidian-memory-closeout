@@ -18,15 +18,14 @@ The installable package follows the Agent Skills `SKILL.md` format for Codex, Cl
 - **Lint**: check schema, links, privacy, stale decisions, duplicated/noisy notes, coverage gaps, and secret-like content before handoff.
 - **Maintain**: keep no-op automations quiet, use checked patch proposals for risky canonical edits, run optional maintenance loops, evaluate retrieval changes, and refresh Graphify or other derived indexes without treating them as source of truth.
 
-## What's New In v0.3.1
+## What's New In v0.3.2
 
-- Claude support: installable in Claude Code at `~/.claude/skills/obsidian-memory-closeout/SKILL.md`.
-- Claude.ai custom skill support via `dist/obsidian-memory-closeout.zip`.
-- Claude-compatible skill metadata with a concise `description` under the custom skill limit.
-- Claude install docs, release notes, validation coverage, and `scripts/install_claude.sh`.
-- Retrieval-aware read-before-work: agents treat read sets as operational input and use coverage warnings before assuming completeness.
-- Retrieval signals: project state, wikilinks, graph relations, entity matches, keyword/BM25, recency, status, confidence, and coverage.
-- Proposal-first memory updates, read receipt closeouts, automation hygiene, maintenance loops, generated surfaces, and retrieval eval guidance.
+- Clearer Agent Skills positioning for Codex, Claude Code, Claude.ai custom skills, and compatible agents.
+- Agent Skills CLI install option with full-depth discovery via `npx skills add`.
+- More scannable `Query / Ingest / Lint / Maintain` README overview.
+- Related Obsidian Skills section linking [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) as a complementary repository.
+- Optional web clip extraction guidance using tools such as Defuddle as pre-processing only.
+- Stronger validation coverage for Agent Skills compatibility, related-skill docs, and raw article text guardrails.
 
 ## Checked Memory Edits
 
