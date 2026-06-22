@@ -37,7 +37,9 @@ Use this checklist when reviewing the repository or preparing a release.
 - README has install, validate, package, usage, privacy, and license sections.
 - README documents Codex, Claude Code, Claude.ai custom skill, and manual install paths.
 - README links [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) as a complementary Obsidian skills repository.
-- README documents Agent Skills CLI installation with full-depth discovery or points users to release ZIP/manual install.
+- README documents open skills CLI installation or points users to release ZIP/manual install.
+- README includes static MIT license, Agent Skills, and current version badges; release notes are tracked in `CHANGELOG.md`.
+- GitHub Releases are created by `.github/workflows/release.yml` when semantic version tags are pushed.
 - Claude Code personal install path is documented as `~/.claude/skills/obsidian-memory-closeout`.
 - Claude Code project install path is documented as `.claude/skills/obsidian-memory-closeout`.
 - Claude.ai custom skill package path is documented as `dist/obsidian-memory-closeout.zip`.

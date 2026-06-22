@@ -4,6 +4,8 @@
 
 [![Validate](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml/badge.svg)](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-2ea44f.svg)](https://skills.sh/)
+![Version](https://img.shields.io/badge/version-v0.3.3-blue.svg)
 
 Turn meaningful work into curated Obsidian memory, and read that memory before acting.
 
@@ -18,14 +20,11 @@ The installable package follows the Agent Skills `SKILL.md` format for Codex, Cl
 - **Lint**: check schema, links, privacy, stale decisions, duplicated/noisy notes, coverage gaps, and secret-like content before handoff.
 - **Maintain**: keep no-op automations quiet, use checked patch proposals for risky canonical edits, run optional maintenance loops, evaluate retrieval changes, and refresh Graphify or other derived indexes without treating them as source of truth.
 
-## What's New In v0.3.2
+## What's New In v0.3.3
 
-- Clearer Agent Skills positioning for Codex, Claude Code, Claude.ai custom skills, and compatible agents.
-- Agent Skills CLI install option with full-depth discovery via `npx skills add`.
-- More scannable `Query / Ingest / Lint / Maintain` README overview.
-- Related Obsidian Skills section linking [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) as a complementary repository.
-- Optional web clip extraction guidance using tools such as Defuddle as pre-processing only.
-- Stronger validation coverage for Agent Skills compatibility, related-skill docs, and raw article text guardrails.
+- Open skills CLI install docs with `npx skills add Nova1390/obsidian-memory-closeout`.
+- Skills.sh discovery topics: `skills-sh` and `skill-hub`.
+- Automated GitHub Release creation when semantic version tags are pushed.
 
 ## Checked Memory Edits
 
@@ -149,8 +148,9 @@ When using Graphify, keep `.graphifyignore` privacy-aware and avoid indexing raw
 ├── assets/                            # Public repository images
 ├── docs/                              # Claude, Graphify, web clip, release, and quality docs
 ├── scripts/                           # Install, validation, and packaging helpers
-├── .github/workflows/validate.yml      # CI validation workflow
+├── .github/workflows/                  # CI validation and tag release workflows
 ├── AGENTS.md                          # Guidance for agents editing this repo
+├── CHANGELOG.md                       # Keep a Changelog release notes
 ├── CONTRIBUTING.md                    # Contribution and public-safety rules
 ├── PRIVACY.md                         # Privacy model and boundaries
 ├── SECURITY.md                        # Security reporting policy
@@ -249,12 +249,12 @@ cp -R skill/obsidian-memory-closeout ~/.claude/skills/obsidian-memory-closeout
 
 Restart Codex after copying. Claude Code detects edits to existing skill folders during a session, but starting a fresh session is the simplest verification path.
 
-### Option F: Agent Skills CLI
+### Option F: Install via the open skills CLI
 
-If your agent environment supports the Agent Skills CLI, install the skill from the repository with a full-depth search:
+If your agent environment supports the open skills CLI, install the `obsidian-memory-closeout` skill into your agent, such as Claude Code, Codex, or Cursor. Everything stays local.
 
-```bash
-npx skills add https://github.com/Nova1390/obsidian-memory-closeout --full-depth --skill obsidian-memory-closeout
+```sh
+npx skills add Nova1390/obsidian-memory-closeout
 ```
 
 Use the release ZIP or manual install options above if your environment does not support `npx skills add`.

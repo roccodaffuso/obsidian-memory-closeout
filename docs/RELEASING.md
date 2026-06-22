@@ -1,6 +1,6 @@
 # Releasing
 
-This repository can publish releases manually using the generated skill zip. The same zip can be uploaded as a Claude.ai custom skill because it contains the `obsidian-memory-closeout/` skill folder at archive root.
+This repository publishes GitHub Releases automatically when a semantic version tag is pushed. The generated skill zip can still be built manually and uploaded as a Claude.ai custom skill because it contains the `obsidian-memory-closeout/` skill folder at archive root.
 
 ## Prepare
 
@@ -24,12 +24,14 @@ This repository can publish releases manually using the generated skill zip. The
 Use semantic version tags:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag -a v0.3.3 -m "v0.3.3"
+git push origin v0.3.3
 ```
+
+Pushing the tag triggers `.github/workflows/release.yml`, which creates the GitHub Release with generated notes.
 
 ## Release Asset
 
-Attach `dist/obsidian-memory-closeout.zip` to the GitHub release if you want users to install from a zip instead of the GitHub directory URL.
+Attach `dist/obsidian-memory-closeout.zip` to the GitHub release only if you want users to install from a zip instead of the GitHub directory URL.
 
 For Claude users, mention that the release asset can be uploaded in Claude's custom Skills settings or copied into `~/.claude/skills/obsidian-memory-closeout` for Claude Code.

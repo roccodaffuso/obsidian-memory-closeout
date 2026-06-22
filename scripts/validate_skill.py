@@ -26,6 +26,7 @@ PUBLIC_SAFETY_PATTERNS = {
 }
 REQUIRED_ROOT_FILES = (
     "README.md",
+    "CHANGELOG.md",
     "PRIVACY.md",
     "CONTRIBUTING.md",
     "SECURITY.md",
@@ -36,6 +37,7 @@ REQUIRED_ROOT_FILES = (
     "docs/CLAUDE.md",
     "docs/QUALITY_CHECKLIST.md",
     "docs/WEB_CLIPS.md",
+    ".github/workflows/release.yml",
     ".github/workflows/validate.yml",
 )
 REQUIRED_SKILL_FILES = (
@@ -374,7 +376,50 @@ def main() -> int:
             "kepano/obsidian-skills",
             "Related Obsidian Skills",
             "npx skills add",
-            "--full-depth",
+            "Nova1390/obsidian-memory-closeout",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "README.md",
+        (
+            "Agent%20Skills-compatible",
+            "version-v0.3.3",
+            "Install via the open skills CLI",
+            "skills-sh",
+            "skill-hub",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "CHANGELOG.md",
+        (
+            "Keep a Changelog",
+            "[0.3.3] - 2026-06-22",
+            "npx skills install docs",
+            "skills.sh discovery topics",
+            "Automated GitHub Release workflow",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        ".github/workflows/release.yml",
+        (
+            'tags:',
+            'v*.*.*',
+            "contents: write",
+            "gh release create",
+            "--generate-notes",
+            "GH_TOKEN",
         ),
     )
     if result is not None:
