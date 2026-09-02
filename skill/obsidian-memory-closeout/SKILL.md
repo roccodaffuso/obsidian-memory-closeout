@@ -279,6 +279,9 @@ Every canonical note should have enough metadata to answer:
 Some vaults maintain derived graph, search, or index artifacts. Markdown notes remain canonical.
 
 - Run the vault's documented refresh command if one exists.
+- Keep synchronous closeouts proportional to the actual change. A receipt-only or explicit no-durable-change closeout should not rebuild derived graphs or indexes unless the vault contract requires it.
+- When a vault separates a deterministic core graph or operational index from an expensive visualization graph, refresh only the core surfaces during normal knowledge-bearing closeouts. Defer the full visualization refresh to an explicit request or scheduled batch.
+- Prefer one documented quick safety suite before commit instead of repeating component audits already included by that suite. Reserve full retrieval evaluation for changes to retrieval logic, retrieval surfaces, or evaluation cases.
 - Do not invent graph/index commands when the vault has no documented workflow.
 - If derived outputs are expected, verify they were regenerated and include them in quality checks.
 - Do not treat Graphify, any knowledge graph tool, or any private output path as mandatory for every vault.
